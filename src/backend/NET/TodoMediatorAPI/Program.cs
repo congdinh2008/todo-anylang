@@ -26,10 +26,6 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Add Repositories
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-// Add Services
-builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
-builder.Services.AddScoped(typeof(ITodoService), typeof(TodoService));
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
