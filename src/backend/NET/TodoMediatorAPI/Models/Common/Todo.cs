@@ -13,9 +13,9 @@ public class Todo: EntityBase
 
     [Required]
     [DefaultValue(false)]
-    public bool IsComplete { get; set; }
+    public bool IsCompleted { get; set; }
 
-    public int CategoryId { get; set; }
+    public Guid CategoryId { get; set; }
 
     public Category? Category { get; set; }
 }

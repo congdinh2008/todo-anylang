@@ -53,16 +53,13 @@ namespace TodoMediatorAPI.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("CategoryId1")
+                    b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("InsertedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsComplete")
+                    b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
@@ -78,7 +75,7 @@ namespace TodoMediatorAPI.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId1");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Todos", "common");
                 });
@@ -87,7 +84,9 @@ namespace TodoMediatorAPI.Data.Migrations
                 {
                     b.HasOne("TodoMediatorAPI.Category", "Category")
                         .WithMany("Items")
-                        .HasForeignKey("CategoryId1");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
                 });

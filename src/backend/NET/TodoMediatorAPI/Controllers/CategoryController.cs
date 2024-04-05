@@ -33,8 +33,10 @@ public class CategoryController : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<CategoryViewModel>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAllAsync(CategoryGetAllQuery query)
+    public async Task<IActionResult> GetAllAsync()
     {
+        var query = new CategoryGetAllQuery();
+        
         var result = await _mediator.Send(query);
         
         if (result == null)
@@ -99,7 +101,7 @@ public class CategoryController : ControllerBase
         {
             return NotFound();
         }
-        
+
         return Ok(result);
     }
 }
