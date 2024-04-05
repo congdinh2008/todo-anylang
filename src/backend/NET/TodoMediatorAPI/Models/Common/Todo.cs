@@ -9,7 +9,7 @@ public class Todo: EntityBase
 {
     [Required]
     [StringLength(50, MinimumLength = 3)]
-    public string? Name { get; set; }
+    public required string Name { get; set; }
 
     [Required]
     [DefaultValue(false)]

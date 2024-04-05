@@ -23,6 +23,7 @@
     <Folder Include="Data/Infrastructure/RepositoryBase/" />
     <Folder Include="Models/Common/" />
     <Folder Include="Models/EntityBase/" />
+    <Folder Include="Services/Todo/" />
   </ItemGroup>
 
 </Project>

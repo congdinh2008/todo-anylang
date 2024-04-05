@@ -1,41 +1,41 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace TodoMediatorAPI;
+﻿namespace TodoMediatorAPI;
 
 public class PaginatedResult<T>
 {
-    public int PageIndex { get; private set; }
-    public int TotalPages { get; private set; }
-    public T[] Items { get; set; }
-
-    public PaginatedResult(List<T> items, int count, int pageIndex, int pageSize)
+    public PaginatedResult(int pageNumber, int pageSize, int totalCount, IEnumerable<T> items)
     {
-        PageIndex = pageIndex;
-        TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+        if (pageNumber < 0)
+        {
+            throw new ArgumentOutOfRangeException($"Page number ({nameof(pageNumber)}) should be at least 1.");
+        }
 
+        if (pageSize <= 0)
+        {
+            throw new ArgumentOutOfRangeException($"Page size ({nameof(pageSize)}) should be at least 1.");
+        }
+
+        if (totalCount < 0)
+        {
+            throw new ArgumentOutOfRangeException($"Total count ({nameof(totalCount)}) should not be negative.");
+        }
+
+        var totalPages = totalCount / (float)pageSize;
+
+        PageNumber = pageNumber;
+        PageSize = pageSize;
+        TotalCount = totalCount;
+        TotalPages = (int)Math.Ceiling(totalPages);
         Items = items.ToArray();
     }
 
-    public bool HasPreviousPage
-    {
-        get
-        {
-            return (PageIndex > 1);
-        }
-    }
+    public int PageNumber { get; set; }
 
-    public bool HasNextPage
-    {
-        get
-        {
-            return (PageIndex < TotalPages);
-        }
-    }
+    public int PageSize { get; set; }
 
-    public static async Task<PaginatedResult<T>> CreateAsync(IQueryable<T> query, int pageIndex, int pageSize)
-    {
-        var count = await query.CountAsync();
-        var items = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
-        return new PaginatedResult<T>(items, count, pageIndex, pageSize);
-    }
+    //this is the total count of items in the db, not total of count in current items
+    public int TotalCount { get; set; }
+
+    public int TotalPages { get; set; }
+
+    public T[] Items { get; set; }
 }
