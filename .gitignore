@@ -1,3 +1,4 @@
 src/backend/NET/TodoAPI/obj/**
 src/backend/NET/TodoAPI/bin/**
 **/.DS_Store
+src/backend/Java/todoapibase/.mvn/*
