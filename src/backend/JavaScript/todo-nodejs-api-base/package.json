@@ -2,14 +2,14 @@
   "name": "todo-nodejs-api-base",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
-    "start:dev": "nodemon src/app.js",
-    "start:prod": "node src/app.js",
-    "start:debug": "node --inspect src/app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "start:dev": "nodemon app.js",
+    "start:prod": "node app.js",
+    "start:debug": "node --inspect app.js"
   },
   "author": "Cong Dinh",
   "license": "ISC",
@@ -18,6 +18,8 @@
     "express": "^4.19.2",
     "nodemon": "^3.1.0",
     "sequelize": "^6.37.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
     "tedious": "^18.1.0"
   }
 }
