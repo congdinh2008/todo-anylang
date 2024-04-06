@@ -2,3 +2,5 @@ src/backend/NET/TodoAPI/obj/**
 src/backend/NET/TodoAPI/bin/**
 **/.DS_Store
 src/backend/Java/todoapibase/.mvn/*
+src/backend/python/todo-api-base/.todo/*
+src/backend/python/todo-api-base/**/__pycache__/*
