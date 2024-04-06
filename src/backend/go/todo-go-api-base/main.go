@@ -6,8 +6,17 @@ import (
 	"os"
 
 	"congdinh.com/todo-go-api-base/controllers"
+	"congdinh.com/todo-go-api-base/startup"
 	"github.com/gin-gonic/gin"
 )
+
+func init() {
+	startup.LoadEnv()
+
+	// Connect to SQL Server database
+	startup.ConnectDB()
+
+}
 
 func main() {
 	// Set the router as the default one shipped with Gin
@@ -30,7 +39,7 @@ func main() {
 	// Start serving the application
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080"
+		port = "3000"
 	}
 	router.Run(":" + port)
 }

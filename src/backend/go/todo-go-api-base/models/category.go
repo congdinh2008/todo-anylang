@@ -5,5 +5,6 @@ package models
 
 type Category struct {
 	EntityBase
-	Name string `json:"name" bson:"name"`
+	Name  string `gorm:"column:Name"`
+	Todos []Todo
 }
