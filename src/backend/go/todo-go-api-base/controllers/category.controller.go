@@ -31,6 +31,7 @@ func CreateCategory(c *gin.Context) {
 		return
 	}
 
+	// Return created category
 	startup.DB.First(&category, id)
 
 	c.JSON(http.StatusOK, gin.H{
