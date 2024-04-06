@@ -4,3 +4,4 @@ src/backend/NET/TodoAPI/bin/**
 src/backend/Java/todoapibase/.mvn/*
 src/backend/python/todo-api-base/.todo/*
 src/backend/python/todo-api-base/**/__pycache__/*
+**/node_modules/*
