@@ -10,7 +10,7 @@ import (
 // Create a new type named Entity that is a struct with fields: Id, InsertedAt, UpdatedAt, IsDeleted
 
 type EntityBase struct {
-	Id        uuid.UUID      `gorm:"type:uniqueidentifier;default:newid();column:Id;primaryKey;"`
+	Id        uuid.UUID      `gorm:"type:uniqueidentifier;column:Id;primaryKey;"` // primary key
 	CreatedAt time.Time      `gorm:"column:InsertedAt"`
 	UpdatedAt time.Time      `gorm:"column:UpdatedAt"`
 	DeletedAt gorm.DeletedAt `gorm:"column:DeletedAt"`

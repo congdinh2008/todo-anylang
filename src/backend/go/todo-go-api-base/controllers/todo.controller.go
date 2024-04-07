@@ -22,17 +22,15 @@ func GetTodos(c *gin.Context) {
 func CreateTodo(c *gin.Context) {
 	var todo models.Todo
 	c.BindJSON(&todo)
-	id := startup.DB.Create(&todo)
+	todo.Id = uuid.New()
+	result := startup.DB.Create(&todo)
 
-	if id.Error != nil {
+	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"message": id.Error.Error(),
+			"message": result.Error.Error(),
 		})
 		return
 	}
-
-	// Return created todo
-	startup.DB.First(&todo, id)
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Create Todo",
@@ -63,6 +61,7 @@ func UpdateTodo(c *gin.Context) {
 	var todo models.Todo
 
 	id := c.Param("id")
+	todo.Id, _ = uuid.Parse(id)
 
 	startup.DB.First(&todo, id)
 

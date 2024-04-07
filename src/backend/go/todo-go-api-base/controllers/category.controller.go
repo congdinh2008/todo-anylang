@@ -22,17 +22,15 @@ func GetCategories(c *gin.Context) {
 func CreateCategory(c *gin.Context) {
 	var category models.Category
 	c.BindJSON(&category)
-	id := startup.DB.Create(&category)
+	category.Id = uuid.New()
+	result := startup.DB.Create(&category)
 
-	if id.Error != nil {
+	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"message": id.Error.Error(),
+			"message": result.Error.Error(),
 		})
 		return
 	}
-
-	// Return created category
-	startup.DB.First(&category, id)
 
 	c.JSON(http.StatusOK, gin.H{
 		"message":  "Create Category",
@@ -63,6 +61,7 @@ func UpdateCategory(c *gin.Context) {
 	var category models.Category
 
 	id := c.Param("id")
+	category.Id, _ = uuid.Parse(id)
 
 	startup.DB.First(&category, id)
 
